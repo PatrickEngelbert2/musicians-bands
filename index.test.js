@@ -10,15 +10,17 @@ describe('Band and Musician Models', () => {
         // by setting 'force:true' the tables are recreated each time the 
         // test suite is run
         await sequelize.sync({ force: true });
-    })
+    });
 
     test('can create a Band', async () => {
         // TODO - test creating a band
-        expect('NO TEST').toBe('EXPECTED VALUE HERE');
-    })
+        const wannaBe = await Musician.create({name : "Patrick's Band"})
+        expect(wannaBe.name).toBe("Patrick's Band");
+    });
 
     test('can create a Musician', async () => {
         // TODO - test creating a musician
-        expect('NO TEST').toBe('EXPECTED VALUE HERE');
-    })
-})
+        const wannaBe = await Musician.create({name : "Patrick"})
+        expect(wannaBe.name).toBe('Patrick');
+    });
+});
