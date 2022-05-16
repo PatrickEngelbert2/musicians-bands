@@ -2,9 +2,9 @@ const {sequelize} = require('./db');
 const {DataTypes, Model} = require('sequelize');
 
 // TODO - define the Band model
-class Band extends Model {}
+class Song extends Model {}
 
-Band.init({
+Song.init({
     name : DataTypes.STRING,
     genre : DataTypes.STRING
 },{
@@ -12,5 +12,5 @@ Band.init({
 })
 
 module.exports = {
-    Band
+    Song
 };

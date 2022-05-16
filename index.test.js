@@ -1,5 +1,5 @@
 const {sequelize} = require('./db');
-const {Band, Musician} = require('./index')
+const {Band, Musician, Song} = require('./index')
 
 describe('Band and Musician Models', () => {
     /**
@@ -29,8 +29,8 @@ describe('Band and Musician Models', () => {
 
         const patrick = await Musician.create({name: "Patrick", instrament: "Son"});
         const nick = await Musician.create({name: "Nick", instrament: "Son"});
-        const tiffany = await Musician.create({name: "Tiffany", instrament: "daughter"});
-        const carissa = await Musician.create({name: "Carissa", instrament: "daughter"});
+        const tiffany = await Musician.create({name: "Tiffany", instrament: "Daughter"});
+        const carissa = await Musician.create({name: "Carissa", instrament: "Daughter"});
         const sherry = await Musician.create({name: "Sherry", instrament: "Mother"});
         const Jim = await Musician.create({name: "Jim", instrament: "Father"});
 
@@ -45,5 +45,12 @@ describe('Band and Musician Models', () => {
 
         expect(musicians.length).toBe(6);
         expect(musicians[0] instanceof Musician).toBe(true);
+    });
+
+    test('can create a Song', async () => {
+        // TODO - test creating a musician
+        const wannaSong = await Song.create({name : "Patrick's Song", genre: "Person"})
+        console.log("I'm the song!!!!", wannaSong)
+        expect(wannaSong.name).toBe("Patrick's Song");
     });
 });
