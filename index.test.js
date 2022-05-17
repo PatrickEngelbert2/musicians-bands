@@ -48,9 +48,33 @@ describe('Band and Musician Models', () => {
     });
 
     test('can create a Song', async () => {
-        // TODO - test creating a musician
+        // TODO - test creating a song
         const wannaSong = await Song.create({name : "Patrick's Song", genre: "Person"})
         console.log("I'm the song!!!!", wannaSong)
         expect(wannaSong.name).toBe("Patrick's Song");
+    });
+
+    test('Song is associated with Band as a many-to-many relationship', async () => {
+        const Unlucky = await Song.create({name : "Unlucky", genre: "I'm not a Song..."}); 
+        const Lucky = await Song.create({name : "Lucky", genre: "...But I am"}); 
+
+        const firstB = await Band.create({name: "Card", genre: "It's a band..."}); 
+        const secondB = await Band.create({name: "Band", genre: "...I promise"}); 
+
+        await Unlucky.addBand(firstB); 
+        await Unlucky.addBand(secondB); 
+
+        const Bands = await Unlucky.getBands(); 
+
+        expect(Bands.length).toBe(2); 
+        expect(Bands[0] instanceof Band).toBe(true); 
+
+        await firstB.addSong(Unlucky); 
+        await firstB.addSong(Lucky); 
+
+        const setOfSongs = await firstB.getSongs(); 
+
+        expect(setOfSongs.length).toBe(2); 
+        expect(setOfSongs[0] instanceof Song).toBe(true);
     });
 });
